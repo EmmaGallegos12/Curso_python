@@ -8,19 +8,19 @@ def display_board(dboard:dict)->None:
     print("--+--+---")
     print(f"{d[6]:2s}|{d[7]:2}|{d[8]:2s}")
 
-def player_turn(player:str, dboard:dict) ->bool:
-    """ Ask player for their turn    """
-    valid_move = False
-    user_input = input(f"Player {player}, enter your move (0 - 8): ")
+def player_turn(player:str, dboard:dict)->bool:
+    """ Ask player for their turn
+    """
+    valid_move = False 
+    user_input = input(f"Player {player}, enter your move (0-8): ")
     user_input = int(user_input)
     print(f"Value entered: {user_input} type: {type(user_input)}")
     if user_input in dboard.keys():
-        if dboard[user_input] not in ['x', '0']:
+        if dboard[user_input] not in ['X', 'O']:
             dboard[user_input] = player
             valid_move = True
         else:
             print("Invalid move: Cell already occupied.")
-        
     else:
         print("Invalid move: Cell does not exist.")
     return valid_move
@@ -28,12 +28,14 @@ def player_turn(player:str, dboard:dict) ->bool:
 if __name__ == "__main__":
     board = {x:str(x) for x in range(9)}
     display_board(board)
-    move = player_turn('x', board)
+    move = player_turn('X', board)
     print(f"Move valid: {move}")
     display_board(board)
-
-    move = player_turn('0', board)
+    
+    move = player_turn('O', board)
     print(f"Move valid: {move}")
     display_board(board)
     print(board)
-
+    #board[0] = 'X'
+    #board[4] = 'O'
+    #display_board(board)
