@@ -1,37 +1,49 @@
-from Athelete import Athlete
+"""
+Docstring for game_tournament.Team
+"""
+from Athlete import Athlete
 from Sport import Sport
 
 class Team:
-    """ Team class represent a team in the tournament, It has a name, a sport and a list of athletes."""
-
+    """ Team class represents a team in the tournament. It has a name, a sport, and a list of athletes. """
     def __init__(self, name, sport:Sport):
-        """Custom constructor for Team class."""
-        self.name = ""
-        self.sport = None
+        """ Custom constructor for Team class. """
+        self.name = name
+        self.set_sport(sport)
         self.athletes = []
-
+    def set_sport(self, sport):
+        """ Set the sport for the team. """
+        if isinstance(sport, Sport):
+            self.sport = sport
+        else:
+            raise ValueError("Only Sport objects can be set as the team's sport.")
     def add_athlete(self, athlete):
-        """Add an athlete to the team."""
+        """ Add an athlete to the team. """
         if isinstance(athlete, Athlete):
             self.athletes.append(athlete)
         else:
-            raise TypeError("Only Athelete objects can be added to the team.")
-        
+            raise ValueError("Only Athlete objects can be added to the team.")
+    def __str__(self):
+        """ String representation of the Team class. """
+        return f"{self.name} - {self.sport.name} ({len(self.athletes)} athletes)"
+    def __repr__(self):
+        """ String representation of the Team class. """
+        return f"Team(name={self.name}, sport={repr(self.sport)})"
+    def to_json(self):
+        """ Convert the Team object to a JSON string. """
+        return {
+            "name": self.name,
+            "sport": self.sport.to_json(),
+            "athletes": [athlete.to_json() for athlete in self.athletes]
+        }
 
 if __name__ == "__main__":
-    team1 = Team("Lakers", "Basketball")
-    team1.name = "Lakers"
-    sport1 = Sport("Basketball", 10, "NBA")
-    athlete1 = Athlete("Michael Jordan")
-    athlete2 = Athlete("LeBron James")
-    
-    team1.add_athlete(athlete1)
-    team1.add_athlete(athlete2)
-    
-    print(f"Team Name: {team1.name}")
-    print(f"Sport: {sport1}")
-    print("Athletes in the team:")
-    for athlete in team1.athletes:
-        print(athlete)
-        
-
+    a = Athlete("Lionel Messi")
+    b = Athlete("Diego Armando")
+    s = Sport("Futbol",11,"FIFA")
+    argentina  = Team("Argentina",s)
+    argentina.add_athlete(a)
+    argentina.add_athlete(b)
+    print(argentina)
+    print(repr(argentina))
+    print(argentina.to_json())
