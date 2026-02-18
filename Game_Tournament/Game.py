@@ -106,11 +106,11 @@ def a_tournament():
     for player in player_italy:
         team_italy.add_athlete(Athlete(player))
     tournament_list = [team_mex, team_arg, team_pero, team_brazil, team_france, team_germany, team_spain, team_italy]
-    data_list = [] 
+    json_list = [] 
     for team in tournament_list:
-        data_list.append(team.to_json()) # Agregamos el diccionario directamente
-        
-    return data_list
+        json_list.append(()) # Agregamos el diccionario directamente
+    return json_list
+
 
 if __name__ == "__main__":
     string_game = a_tournament()
