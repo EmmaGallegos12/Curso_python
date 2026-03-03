@@ -106,10 +106,7 @@ def a_tournament():
     for player in player_italy:
         team_italy.add_athlete(Athlete(player))
     tournament_list = [team_mex, team_arg, team_pero, team_brazil, team_france, team_germany, team_spain, team_italy]
-    json_list = [] 
-    for team in tournament_list:
-        json_list.append(()) # Agregamos el diccionario directamente
-    return json_list
+    return [team.to_json() for team in tournament_list]
 
 
 if __name__ == "__main__":
