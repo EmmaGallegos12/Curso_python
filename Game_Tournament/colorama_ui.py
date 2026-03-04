@@ -73,7 +73,7 @@ class ColoramaUI:
         action_dictionary ={
             "1": self.get_tournament_json,
             "2": self.display_tournament,
-            "3": "exit"
+            "6": "exit"
         }
         while True:
             print("\nTournament")
