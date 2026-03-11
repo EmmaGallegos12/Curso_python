@@ -24,9 +24,9 @@ class ColoramaUI:
             print("3. Exit")
             choice = input("Enter your choice: ")
             if choice == "1":
-                file_path = input("Engter the path to the JSON file: ")
+                file_path = input("Enter the path to the JSON file: ")
                 self.set_current_file(file_path)
-                self.open_tournament(file_path)
+                self.open_tournament()
             elif choice == "2":
                 self.display_tournament()
             elif choice == "3":
