@@ -48,10 +48,40 @@ def listar_por_caracteristica(diccionario_animales, caracteristicas):
     encontrados = False
 
     for animal in diccionario_animales.values():
-        if all(animal.caracteristicas.get(caracteristicas) == '1'):
+        if animal.caracteristicas.get(caracteristicas) == '1':
             print(f"- {animal}")
             encontrados = True
 
     if not encontrados:
         print("No se encontraron animales con estas características.")  
+
+def recolectar_datos_nuevo_animal(diccionario_clases, caracteristicas_requeridas):
+    """
+    Solicita al usuario los datos para un nuevo animal y los valida.
+    """
+    print("\n--- Agregar Nuevo Animal ---")
+    nombre = input("Ingresa el nombre del animal: ").strip().lower()
+    
+    if not nombre:
+        print("El nombre no puede estar vacío.")
+        return None
+
+    print("\nClases disponibles:")
+    for id_c, datos_c in diccionario_clases.items():
+        print(f"{id_c}. {datos_c['Clase_tipo']}")
         
+    clase_id = input("Ingresa el ID de la clasificación: ").strip()
+    if clase_id not in diccionario_clases:
+        print("Clase inválida. Operación cancelada.")
+        return None
+
+    print("\nA continuación, define sus características.")
+    print("Ingresa '1' para Sí, '0' para No (o el número correspondiente para patas).")
+    
+    nuevas_caracteristicas = {}
+    for car in caracteristicas_requeridas:
+        valor = input(f"¿{car.capitalize()}?: ").strip()
+        # Validación muy básica para asegurar que haya un valor
+        nuevas_caracteristicas[car] = valor if valor else '0'
+
+    return nombre, clase_id, nuevas_caracteristicas
