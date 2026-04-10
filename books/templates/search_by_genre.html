@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Libra Online Library - Search by Genre{% endblock %}
+{% block body %}
+<div>
+    <center>
+        <h1>Search by Genre</h1>
+        <form action="/search_by_genre" method="post">
+            <label for="genre">Genre:</label>
+            <input type="text" id="genre" name="genre">
+            <input type="submit" value="Search">
+        </form>
+    <ul>
+        {% for book in books_list %}
+        <li><a href="/book/{{ book.id }}">{{ book.title }}</a> by {{ book.author }}, Genre: {{ book.genre }}</li>
+        {% endfor %}
+    </ul>
+    </center>
+</div>
+{% endblock %}

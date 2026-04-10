@@ -1,27 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Search by Author</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-</head>
-<body>  
-    <h1>Search by Author</h1>
-    <form action="/search_by_author" method="post">
-        <label for="author">Author Name:</label>
-        <input type="text" id="author" name="author">
-        <input type="submit" value="Search">
-    </form>
-    <hr>
-    <h3>Results:</h3>
+{% extends "base.html" %}
+{% block title %}Libra Online Library - Search by Author{% endblock %}
+{% block body %}
+<div>
+    <center>
+        <h1>Search by Author</h1>
+            <form action="/search_by_author" method="post">
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author">
+                <input type="submit" value="Search">
+            </form>
     <ul>
         {% for book in books_list %}
-            <li><strong>{{ book.title }}</strong> by {{ book.author }}</li>
-        {% else %}
-            <li>No books found for this search.</li>
+        <li><a href="/book/{{ book.id }}">{{ book.title }}</a> by {{ book.author }}</li>
         {% endfor %}
     </ul>
-    <p><a href="/">Back to Index</a></p>
-</body>
-</html>
+    </center>
+</div>
+
+{% endblock %}
