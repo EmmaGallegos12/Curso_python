@@ -38,14 +38,7 @@ def carga_archivo_csv(nombre_archivo):
 
 def crea_diccionario_titulos(lista_frases:list) -> dict:
     """ Crea un diccionario con los titulos de las peliculas como claves y las frases como valores """
-    stopwords_español = ["el", "la", "los", "las", "un", "una", "unos", "unas",
-                          "de", "del", "al", "a", "y", "o", "pero", "si", "no", "es", "son",
-                            "en", "por", "para", "con", "sin", "sobre", "entre", "hacia", "desde",
-                              "hasta", "que", "quien", "cuyo", "cuya", "cuyos", "cuyas", "cual",
-                                "cuales", "cuanto", "cuanta", "cuantos", "cuantas", "como", "cuando",
-                                  "donde", "mientras", "aunque", "siempre", "nunca", "aqui", "alli",
-                                    "alla", "ahi", "aca", "allá", "allí", "ahí", "aca", "allá", "allí",
-                                      "ahí", "aca", "allá", "allí", "ahí"]
+    stopwords_español = ["el", "la", "los", "las", "un", "una", "unos", "unas", "de", "del", "al", "a", "y", "o", "pero", "si", "no", "es", "son", "en", "por", "para", "con", "sin", "sobre", "entre", "hacia", "desde", "hasta", "que", "quien", "cuyo", "cuya", "cuyos", "cuyas", "cual", "cuales", "cuanto", "cuanta", "cuantos", "cuantas", "como", "cuando", "donde", "mientras", "aunque", "siempre", "nunca", "aqui", "alli", "alla", "ahi", "aca", "allá", "allí", "ahí", "aca", "allá", "allí", "ahí", "aca", "allá", "allí", "ahí"]
     diccionario_titulos = {}
     for frase in lista_frases:
         #Frase completa
@@ -90,15 +83,29 @@ def buscar_palabras(frases:list, frase_a_buscar:str)->list:
             frases_encontradas.append(frase)
     return frases_encontradas
 
+def buscar_palabras_ratio(frases:list, frase_a_buscar:str, umbral:float=0.50)->list:
+    """ Busca una frase en una lista de frases """
+    frases_encontradas = []
+    frase_a_buscar = frase_a_buscar.lower()
+    for frase in frases:
+        frase_lower = frase.frase.lower()
+        ratio = Levenshtein.ratio(frase_lower, frase_a_buscar)
+        if ratio >=umbral:
+            frase.ratio = ratio
+            frases_encontradas.append(frase)
+    return frases_encontradas
+
+
 if __name__ == "__main__":
     frases = carga_archivo_csv("frases_consolidadas.csv")
     #for frase in frases[0:5]:
     #    print(frase)
     diccionario_titulos = crea_diccionario_titulos(frases)
-    lista_frase_amor = diccionario_titulos["cocinar"]
+    lista_frase_amor = diccionario_titulos["distancia tiempo"]
     for frase in lista_frase_amor:
         print(frase)
     print("############ Levensthein ############")
-    lista_frase_amor = buscar_palabras(frases, "cualquiera cocinar")
+    lista_frase_amor = buscar_palabras(frases, "Las palabras nos pueden hacer infinitamente ")
     for frase in lista_frase_amor:
         print(frase, frase.ratio)
+    

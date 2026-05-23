@@ -18,13 +18,13 @@ def pelicula():
         return render_template("pelicula.html", lista_frases_pelicula=lista_frases_pelicula)
     return render_template("pelicula.html")
 
-@app.route('/frase', methods=['GET', 'POST'])
+@app.route('/frases', methods=['GET', 'POST'])
 def frase():
     if request.method == 'POST':
-        frase = request.form.get('frase')
-        lista_frases_pelicula = diccionario_titulos.get(frase.lower(), [])
-        return render_template("frase.html", lista_frases_pelicula=lista_frases_pelicula)
-    return render_template("frase.html")
+        palabra = request.form.get('frase')
+        lista_frases_palabra = buscar_palabras(frases, palabra)
+        return render_template("frases.html", frases=lista_frases_palabra)
+    return render_template("frases.html", frases=[])
 
 if __name__ == "__main__":
     app.run(debug=True) 
