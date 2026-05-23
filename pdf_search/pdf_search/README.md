@@ -1,4 +1,4 @@
-readme_content = """# Sistema de Búsqueda de Textos en Documentos PDF
+ Sistema de Búsqueda de Textos en Documentos PDF
 
 Este proyecto consiste en un sistema web completo (Frontend y Backend) desarrollado en **Python con Flask** y estilizado con el Framework **Bootstrap 5**. El objetivo principal de la aplicación es indexar documentos PDF desde diversas fuentes web, extraer su contenido de texto (con soporte avanzado de OCR para imágenes) y permitir realizar búsquedas difusas utilizando el algoritmo de **Distancia de Levenshtein** con precisión de hasta 3 dígitos decimales.
 
